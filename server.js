@@ -3,6 +3,8 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 require("dotenv").config();
 
+const usersRoute = require('./routers/user')
+
 const app = express();
 app.use(express.json());
 app.use(express.static("public"));
@@ -10,6 +12,7 @@ app.use(cors({ credentials: true, origin: [process.env.WEB_APP_URL] }));
 
 const PORT = process.env.PORT || 5000;
 
+app.use('/auth',usersRoute)
 mongoose
   .connect(process.env.Data_Base_URL, {
     useNewUrlParser: true,
